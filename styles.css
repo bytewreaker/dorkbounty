@@ -1,0 +1,59 @@
+/* Basic body styles */
+body {
+    background-color: black;
+    color: white;
+}
+h1 {
+    text-align: center;
+    font-family: 'Rubik Vinyl', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* Sticky header styling */
+header {
+    position: sticky; /* Ensure the header is sticky */
+    top: 0; /* Stick to the top */
+    background-color: #000; /* Background color */
+    z-index: 1000; /* Ensure it is above other content */
+}
+/* Input field styling */
+#domainInput {
+    margin-bottom: 10px; /* Space between input and results */
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+/* Result items styling */
+.result-item {
+    margin-bottom: 20px;
+}
+
+.result-item h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.result-item p {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.result-item a {
+    color: #69f0ae;
+    text-decoration: none;
+}
+
+.result-item a:hover {
+    text-decoration: underline;
+}
+
+footer{
+    text-align: center;
+}
+footer a{
+    color: white;
+}
+footer a:hover {
+    color:#69f0ae
+}
