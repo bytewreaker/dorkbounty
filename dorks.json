@@ -1,0 +1,109 @@
+[
+    {
+        "title": "Broad domain search with exclusions",
+        "dork": "site:example.com -www -shop -share -ir -mfa"
+    },
+    {
+        "title": "Filetypes and extensions 1",
+        "dork": "site:example.com ext:php | ext:asp | ext:aspx | ext:jsp | ext:jspx | ext:html | ext:htm | ext:js | ext:txt | ext:conf | ext:cnf | ext:ini | ext:pwd | ext:yaml | ext:yml | ext:sql | ext:config"
+    },
+    {
+        "title": "Filetypes and extensions 2",
+        "dork": "site:example.com ext:log | ext:env | ext:sh | ext:bak | ext:backup | ext:tmp | ext:swp | ext:old | ext:~ | ext:git | ext:svn | ext:htpasswd | ext:htaccess | ext:xml | ext:tar | ext:sql.gz | ext:cfg"
+    },
+    {
+        "title": "Filetypes and extensions 3",
+        "dork": "site:example.com ext:json | ext:pdf | ext:zip | ext:java | ext:ora | ext:xsd | ext:xls | ext:xlsx | ext:reg | ext:gz | ext:csv | ext:docx | ext:doc | ext:password | ext:pem | ext:rdp | ext:inf"
+    },
+    {
+        "title": "Sensitive directories and files",
+        "dork": "site:example.com intitle:index.of"
+    },
+    {
+        "title": "Sensitive Pages",
+        "dork": "site:example.com inurl:login | inurl:admin | inurl:config | inurl:env | inurl:setting | inurl:backup | inurl:php inurl:/.git/config | intitle:phpinfo" 
+    },
+    {
+        "title": "Sensitive Parameters",
+        "dork": "site:example.com inurl:email= | inurl:phone= | inurl:password= | inurl:secret= inurl:&" 
+    },
+    {
+        "title": "Error messages and server configurations",
+        "dork": "site:example.com intitle:\"Index of /\" | intitle:\"Apache HTTP Server Test Page powered by CentOS\" | intitle:\"Test Page for the Apache HTTP Server on Fedora\""
+    },
+    {
+        "title": "Open Redirect prone parameters",
+        "dork": "site:example.com inurl:url= | inurl:return= | inurl:next= | inurl:redirect= | inurl:redir= | inurl:ret= | inurl:r2= | inurl:page= inurl:& inurl:http"
+    },
+    {
+        "title": "SQLi Prone Parameters",
+        "dork": "site:example.com inurl:id= | inurl:pid= | inurl:category= | inurl:cat= | inurl:action= | inurl:sid= | inurl:dir= inurl:&"
+    },
+    {
+        "title": "SSRF Prone Parameters",
+        "dork": "site:example.com inurl:http | inurl:url= | inurl:path= | inurl:dest= | inurl:html= | inurl:data= | inurl:domain=  | inurl:page= inurl:&"
+    },
+    {
+        "title": "LFI Prone Parameters",
+        "dork": "site:example.com inurl:include | inurl:dir | inurl:detail= | inurl:file= | inurl:folder= | inurl:inc= | inurl:locate= | inurl:doc= | inurl:conf= inurl:&"
+    },
+    {
+        "title": "RCE Prone Parameters",
+        "dork": "site:example.com inurl:cmd | inurl:exec= | inurl:query= | inurl:code= | inurl:do= | inurl:run= | inurl:read=  | inurl:ping= inurl:&"
+    },
+    {
+        "title": "File upload endpoints",
+        "dork": "site:example.com \"choose file\""
+    },
+    {
+        "title": "Confidential Internal Dorks 1",
+        "dork": "site:example.com \"password\" | \"credential\" | \"username\" | \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" | \"WS_FTP\" | \"ws_ftp\" | \"log\" | \"LOG\" filetype:log"
+    },
+    {
+        "title": "Confidential Internal Dorks 2",
+        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:pdf"
+    },
+    {
+        "title": "Confidential Internal Dorks 3",
+        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:xls"
+    },
+    {
+        "title": "Confidential Internal Dorks 4",
+        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:csv"
+    },
+    {
+        "title": "Confidential Internal Dorks 5",
+        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:doc"
+    },
+    {
+        "title": "Confidential Internal Dorks 6",
+        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:txt"
+    },
+    {
+        "title": "API Docs",
+        "dork": "site:example.com inurl:apidocs | inurl:api-docs | inurl:swagger | inurl:api-explorer"
+    },
+    {
+        "title": "Sensitive API endpoints",
+        "dork": "site:example.com inurl:/api/"
+    },
+    {
+        "title": "SQL Injection",
+        "dork": "site:example.com intext:\"sql syntax near\" | intext:\"syntax error has occurred\" | intext:\"incorrect syntax near\" | intext:\"unexpected end of SQL command\" | intext:\"Warning: mysql_connect()\" | intext:\"Warning: mysql_query()\" | intext:\"Warning: pg_connect()\""
+    },
+    {
+        "title": "Code Leaks",
+        "dork": "site:pastebin.com \"example.com\""
+    },
+    {
+        "title": "Cloud Storage",
+        "dork": [
+            "site:s3.amazonaws.com \"example.com\"",
+            "site:example.com intitle:index.of.bucket"
+        ]
+    },
+    {
+        "title": "Firebase",
+        "dork": "site:firebaseio.com \"example.com\""
+    }
+]

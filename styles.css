@@ -1,0 +1,78 @@
+/* Fonts and base styles */
+body {
+    font-family: 'Rubik', sans-serif;
+    background-color: #000;
+    color: white;
+}
+
+h1.logo {
+    font-family: 'Rubik Vinyl', cursive;
+    letter-spacing: 2px;
+    font-size: 2.5rem;
+    color: #69f0ae;
+    
+}
+
+/* Glassmorphism header */
+.glass-header {
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    text-align: center;
+}
+
+
+/* Input field styling */
+#domainInput {
+    border-color: #69f0ae;
+    box-shadow: 0 0 10px rgba(105, 240, 174, 0.4);
+    outline: none;
+    font-size: larger;
+    width: 50%;
+}
+
+/* Result item styling */
+.result-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(105, 240, 174, 0.3);
+}
+
+.result-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.result-item p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+}
+
+.result-item a {
+    color: #69f0ae;
+    text-decoration: none;
+}
+
+.result-item a:hover {
+    text-decoration: underline;
+}
+
+/* Footer styling */
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: #69f0ae;
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+}
