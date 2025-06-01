@@ -53,16 +53,22 @@ document.addEventListener('DOMContentLoaded', function () {
             title.textContent = dork.title;
             dorkItem.appendChild(title);
 
-            const dorkContent = document.createElement('p');
+            const dorkContent = document.createElement('div');
+
             const dorkLinks = Array.isArray(dork.dork) ? dork.dork : [dork.dork];
 
-            dorkLinks.forEach(dorkLink => {
+            dorkLinks.forEach((dorkLink, index) => {
                 const link = document.createElement('a');
                 link.href = `https://www.google.com/search?q=${encodeURIComponent(dorkLink)}`;
                 link.target = '_blank';
                 link.textContent = dorkLink;
-                link.classList.add('d-block', 'mb-1');
+
                 dorkContent.appendChild(link);
+
+                // Add line break after each link except the last
+                if (index !== dorkLinks.length - 1) {
+                    dorkContent.appendChild(document.createElement('br'));
+                }
             });
 
             dorkItem.appendChild(dorkContent);
