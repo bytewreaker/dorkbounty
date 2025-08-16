@@ -92,8 +92,8 @@
         "dork": "site:example.com intext:\"sql syntax near\" | intext:\"syntax error has occurred\" | intext:\"incorrect syntax near\" | intext:\"unexpected end of SQL command\" | intext:\"Warning: mysql_connect()\" | intext:\"Warning: mysql_query()\" | intext:\"Warning: pg_connect()\""
     },
     {
-        "title": "Pastebin dork",
-        "dork": "site:pastebin.com \"example.com\""
+        "title": "Third Party Coding Platforms Dorks",
+        "dork": "site:ideone.com | site:codebeautify.org | site:codeshare.io | site:codepen.io | site:repl.it | site:justpaste.it | site:pastebin.com | site:jsfiddle.net | site:trello.com | site:*.atlassian.net | site:bitbucket.org \"example.com\""
     },
     {
         "title": "Cloud Storage",
