@@ -105,5 +105,9 @@
     {
         "title": "Firebase",
         "dork": "site:firebaseio.com \"example.com\""
+    },
+    {
+        "title": "Google Drive",
+        "dork": "site:example.com intext:\"drive.google.com/drive/\""
     }
 ]
