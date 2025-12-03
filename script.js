@@ -12,14 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             dorkData = data;
             hideLoading();
-            displayDorks(updateDorks(dorkData, 'example.com'));
+            renderDorks(updateDorks(dorkData, 'example.com'));
 
             domainInput.addEventListener('input', () => {
                 clearTimeout(debounceTimer);
                 debounceTimer = setTimeout(() => {
-                    const searchTerm = domainInput.value.trim();
-                    const updated = updateDorks(dorkData, searchTerm || 'example.com');
-                    displayDorks(updated);
+                    const searchTerm = domainInput.value.trim() || 'example.com';
+                    renderDorks(updateDorks(dorkData, searchTerm));
                 }, 300);
             });
         })
@@ -29,53 +28,92 @@ document.addEventListener('DOMContentLoaded', function () {
             showError('Failed to load dorks. Please try again later.');
         });
 
-    function updateDorks(dorks, searchTerm) {
-        return dorks.map(dork => ({
-            ...dork,
-            dork: Array.isArray(dork.dork)
-                ? dork.dork.map(d => d.replace(/example\.com/g, searchTerm))
-                : dork.dork.replace(/example\.com/g, searchTerm)
+    // --------------------------
+    // Replace example.com -> target
+    // --------------------------
+    function updateDorks(dorks, target) {
+        return dorks.map(entry => ({
+            ...entry,
+            dork: Array.isArray(entry.dork)
+                ? entry.dork.map(q => q.replace(/example\.com/g, target))
+                : entry.dork.replace(/example\.com/g, target)
         }));
     }
 
-    function displayDorks(dorks) {
+    // --------------------------
+    // Build URLs for multiple engines
+    // --------------------------
+    function buildSearchUrl(engine, query) {
+        const encoded = encodeURIComponent(query);
+
+        const engines = {
+            google: `https://www.google.com/search?q=${encoded}`,
+            bing: `https://www.bing.com/search?q=${encoded}`,
+            brave: `https://search.brave.com/search?q=${encoded}`,
+            yandex: `https://yandex.com/search/?text=${encoded}`
+        };
+
+        return engines[engine];
+    }
+
+    const enginesList = ["google", "bing", "brave", "yandex"];
+
+    // --------------------------
+    // Render results
+    // --------------------------
+    function renderDorks(dorks) {
         resultsContainer.innerHTML = '';
-        if (dorks.length === 0) {
+
+        if (!dorks.length) {
             resultsContainer.innerHTML = '<p class="text-muted">No results found.</p>';
             return;
         }
 
-        dorks.forEach(dork => {
-            const dorkItem = document.createElement('div');
-            dorkItem.className = 'result-item';
+        dorks.forEach(entry => {
+            const card = document.createElement('div');
+            card.className = 'result-item';
 
             const title = document.createElement('h3');
-            title.textContent = dork.title;
-            dorkItem.appendChild(title);
+            title.textContent = entry.title;
+            card.appendChild(title);
 
             const dorkContent = document.createElement('div');
+            const patterns = Array.isArray(entry.dork) ? entry.dork : [entry.dork];
 
-            const dorkLinks = Array.isArray(dork.dork) ? dork.dork : [dork.dork];
+            patterns.forEach(pattern => {
+                const block = document.createElement('div');
+                block.className = 'dork-block';
 
-            dorkLinks.forEach((dorkLink, index) => {
-                const link = document.createElement('a');
-                link.href = `https://www.google.com/search?q=${encodeURIComponent(dorkLink)}`;
-                link.target = '_blank';
-                link.textContent = dorkLink;
+                const patternText = document.createElement('div');
+                patternText.className = 'dork-pattern';
+                patternText.textContent = pattern;
+                block.appendChild(patternText);
 
-                dorkContent.appendChild(link);
+                // Engine links
+                const btnRow = document.createElement('div');
+                btnRow.className = 'engine-links';
 
-                // Add line break after each link except the last
-                if (index !== dorkLinks.length - 1) {
-                    dorkContent.appendChild(document.createElement('br'));
-                }
+                enginesList.forEach(engine => {
+                    const a = document.createElement('a');
+                    a.href = buildSearchUrl(engine, pattern);
+                    a.target = "_blank";
+                    a.className = 'engine-btn';
+                    a.textContent = engine;
+                    btnRow.appendChild(a);
+                });
+
+                block.appendChild(btnRow);
+                dorkContent.appendChild(block);
             });
 
-            dorkItem.appendChild(dorkContent);
-            resultsContainer.appendChild(dorkItem);
+            card.appendChild(dorkContent);
+            resultsContainer.appendChild(card);
         });
     }
 
+    // --------------------------
+    // UI helpers
+    // --------------------------
     function showLoading() {
         resultsContainer.innerHTML = `
             <div class="text-center my-4">
