@@ -40,23 +40,103 @@ document.addEventListener('DOMContentLoaded', function () {
         }));
     }
 
+
+    // =====================================
+// Universal → Per-Engine Operator Mapper
+// =====================================
+
+function rewriteQueryForEngine(query, engine) {
+    engine = engine.toLowerCase();
+
+    // ======================
+    // GOOGLE (native syntax)
+    // ======================
+    if (engine === "google") {
+        return query;
+    }
+
+    // ======================
+    // BING
+    // - Converts -word → NOT word
+    // - Keeps site:, inurl:, intitle:
+    // ======================
+    if (engine === "bing") {
+        return query
+            .replace(/ -/g, " NOT ")    // -xxx → NOT xxx
+            .replace(/\|/g, " OR ");    // "|" → "OR"
+    }
+
+    // ======================
+    // DUCKDUCKGO
+    // - No reliable inurl:
+    // - Convert -word → -"word"
+    // - Convert inurl:x → "x" (soft match)
+    // ======================
+    if (engine === "duckduckgo") {
+        return query
+            .split(/\s+/)
+            .map(token => {
+                if (token.startsWith("inurl:")) {
+                    return `"${token.slice(6)}"`;     // inurl:admin → "admin"
+                }
+                if (token.startsWith("-")) {
+                    return `-"${token.slice(1)}"`;    // -admin → -"admin"
+                }
+                return token;
+            })
+            .join(" ")
+            .replace(/\|/g, " OR ");
+    }
+
+    // ======================
+    // BAIDU
+    // - Only site: works fully
+    // - No filetype:, no inurl:
+    // - Keep only site: + literal negations
+    // ======================
+    if (engine === "baidu") {
+        let parts = query.split(/\s+/);
+        let out = [];
+
+        // keep only site:
+        const site = parts.find(p => p.startsWith("site:"));
+        if (site) out.push(site);
+
+        // convert all -xxx → -"xxx"
+        parts.forEach(p => {
+            if (p.startsWith("-")) out.push(`-"${p.slice(1)}"`);
+        });
+
+        return out.join(" ");
+    }
+
+    // default (no rewrite)
+    return query;
+}
+
+
     // --------------------------
     // Build URLs for multiple engines
     // --------------------------
     function buildSearchUrl(engine, query) {
-        const encoded = encodeURIComponent(query);
+    const rewritten = rewriteQueryForEngine(query, engine);
+    const encoded = encodeURIComponent(rewritten);
 
-        const engines = {
-            google: `https://www.google.com/search?q=${encoded}`,
-            bing: `https://www.bing.com/search?q=${encoded}`,
-            brave: `https://search.brave.com/search?q=${encoded}`,
-            yandex: `https://yandex.com/search/?text=${encoded}`
-        };
+    const engines = {
+        google:    `https://www.google.com/search?q=${encoded}`,
+        bing:      `https://www.bing.com/search?q=${encoded}`,
+        duckduckgo:`https://duckduckgo.com/?q=${encoded}`,
+        baidu:     `https://www.baidu.com/s?wd=${encoded}`,
+        brave:     `https://search.brave.com/search?q=${encoded}`,
+        yandex:    `https://yandex.com/search/?text=${encoded}`
+    };
 
-        return engines[engine];
-    }
+    return engines[engine];
+}
 
-    const enginesList = ["google", "bing", "brave", "yandex"];
+
+    const enginesList = ["google", "bing", "duckduckgo", "baidu", "brave", "yandex"];
+
 
     // --------------------------
     // Render results
