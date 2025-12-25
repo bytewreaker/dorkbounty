@@ -88,28 +88,6 @@ function rewriteQueryForEngine(query, engine) {
             .replace(/\|/g, " OR ");
     }
 
-    // ======================
-    // BAIDU
-    // - Only site: works fully
-    // - No filetype:, no inurl:
-    // - Keep only site: + literal negations
-    // ======================
-    if (engine === "baidu") {
-        let parts = query.split(/\s+/);
-        let out = [];
-
-        // keep only site:
-        const site = parts.find(p => p.startsWith("site:"));
-        if (site) out.push(site);
-
-        // convert all -xxx → -"xxx"
-        parts.forEach(p => {
-            if (p.startsWith("-")) out.push(`-"${p.slice(1)}"`);
-        });
-
-        return out.join(" ");
-    }
-
     // default (no rewrite)
     return query;
 }
@@ -125,17 +103,14 @@ function rewriteQueryForEngine(query, engine) {
     const engines = {
         google:    `https://www.google.com/search?q=${encoded}`,
         bing:      `https://www.bing.com/search?q=${encoded}`,
-        duckduckgo:`https://duckduckgo.com/?q=${encoded}`,
-        baidu:     `https://www.baidu.com/s?wd=${encoded}`,
-        brave:     `https://search.brave.com/search?q=${encoded}`,
-        yandex:    `https://yandex.com/search/?text=${encoded}`
+        duckduckgo:`https://duckduckgo.com/?q=${encoded}`
     };
 
     return engines[engine];
 }
 
 
-    const enginesList = ["google", "bing", "duckduckgo", "baidu", "brave", "yandex"];
+    const enginesList = ["google", "bing", "duckduckgo"];
 
 
     // --------------------------

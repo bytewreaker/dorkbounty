@@ -1,113 +1,121 @@
 [
     {
-        "title": "Broad domain search with exclusions",
-        "dork": "site:example.com -www -shop -share -ir -mfa"
+        "title": "Filetypes and extensions (source & config)",
+        "dork": "site:example.com ext:php | ext:asp | ext:aspx | ext:jsp | ext:jspx | ext:js | ext:json | ext:yaml | ext:yml | ext:env | ext:conf | ext:ini | ext:cfg"
     },
     {
-        "title": "Filetypes and extensions 1",
-        "dork": "site:example.com ext:php | ext:asp | ext:aspx | ext:jsp | ext:jspx | ext:html | ext:htm | ext:js | ext:txt | ext:conf | ext:cnf | ext:ini | ext:pwd | ext:yaml | ext:yml | ext:sql | ext:config"
+        "title": "Backups, logs, and temporary files",
+        "dork": "site:example.com ext:log | ext:bak | ext:backup | ext:old | ext:tmp | ext:swp | ext:zip | ext:tar | ext:gz"
     },
     {
-        "title": "Filetypes and extensions 2",
-        "dork": "site:example.com ext:log | ext:env | ext:sh | ext:bak | ext:backup | ext:tmp | ext:swp | ext:old | ext:~ | ext:git | ext:svn | ext:htpasswd | ext:htaccess | ext:xml | ext:tar | ext:sql.gz | ext:cfg"
+        "title": "Sensitive directories and indexing",
+        "dork": "site:example.com intitle:\"index of\""
     },
     {
-        "title": "Filetypes and extensions 3",
-        "dork": "site:example.com ext:json | ext:pdf | ext:zip | ext:java | ext:ora | ext:xsd | ext:xls | ext:xlsx | ext:reg | ext:gz | ext:csv | ext:docx | ext:doc | ext:password | ext:pem | ext:rdp | ext:inf"
+        "title": "Authentication & admin surfaces",
+        "dork": "site:example.com inurl:login | inurl:auth | inurl:sso | inurl:admin | inurl:dashboard | inurl:console"
     },
     {
-        "title": "Sensitive directories and files",
-        "dork": "site:example.com intitle:index.of"
+        "title": "OAuth & identity flows",
+        "dork": "site:example.com inurl:oauth | inurl:authorize | inurl:callback | inurl:redirect_uri | inurl:token"
     },
     {
-        "title": "Sensitive Pages",
-        "dork": "site:example.com inurl:login | inurl:admin | inurl:config | inurl:env | inurl:setting | inurl:backup | inurl:php inurl:/.git/config | intitle:phpinfo" 
+        "title": "API documentation & schemas",
+        "dork": "site:example.com inurl:swagger | inurl:openapi | inurl:api-docs | inurl:apidocs"
     },
     {
-        "title": "Sensitive Parameters",
-        "dork": "site:example.com inurl:email= | inurl:phone= | inurl:password= | inurl:secret= inurl:&" 
+        "title": "API endpoints & versions",
+        "dork": "site:example.com inurl:/api/ | inurl:/v1/ | inurl:/v2/ | inurl:/internal/"
     },
     {
-        "title": "Error messages and server configurations",
-        "dork": "site:example.com intitle:\"Index of /\" | intitle:\"Apache HTTP Server Test Page powered by CentOS\" | intitle:\"Test Page for the Apache HTTP Server on Fedora\""
+        "title": "GraphQL endpoints",
+        "dork": "site:example.com inurl:graphql | inurl:graphiql | inurl:playground"
     },
     {
-        "title": "Open Redirect prone parameters",
-        "dork": "site:example.com inurl:url= | inurl:return= | inurl:next= | inurl:redirect= | inurl:redir= | inurl:ret= | inurl:r2= | inurl:page= inurl:& inurl:http"
+        "title": "CI/CD and developer artifacts",
+        "dork": "site:example.com inurl:.git | inurl:.github | inurl:.gitlab | inurl:jenkins | inurl:circleci"
     },
     {
-        "title": "SQLi Prone Parameters",
-        "dork": "site:example.com inurl:id= | inurl:pid= | inurl:category= | inurl:cat= | inurl:action= | inurl:sid= | inurl:dir= inurl:&"
+        "title": "File upload & import functionality",
+        "dork": "site:example.com \"choose file\" | inurl:upload | inurl:import"
     },
     {
-        "title": "SSRF Prone Parameters",
-        "dork": "site:example.com inurl:http | inurl:url= | inurl:path= | inurl:dest= | inurl:html= | inurl:data= | inurl:domain=  | inurl:page= inurl:&"
+        "title": "Open redirect discovery parameters",
+        "dork": "site:example.com inurl:url= | inurl:next= | inurl:return= | inurl:redirect= | inurl:callback= inurl:&"
     },
     {
-        "title": "LFI Prone Parameters",
-        "dork": "site:example.com inurl:include | inurl:dir | inurl:detail= | inurl:file= | inurl:folder= | inurl:inc= | inurl:locate= | inurl:doc= | inurl:conf= inurl:&"
+        "title": "SQLi discovery parameters",
+        "dork": "site:example.com inurl:id= | inurl:cat= | inurl:pid= | inurl:action= | inurl:sid= inurl:&"
     },
     {
-        "title": "RCE Prone Parameters",
-        "dork": "site:example.com inurl:cmd | inurl:exec= | inurl:query= | inurl:code= | inurl:do= | inurl:run= | inurl:read=  | inurl:ping= inurl:&"
+        "title": "SSRF discovery parameters",
+        "dork": "site:example.com inurl:url= | inurl:dest= | inurl:path= | inurl:domain= | inurl:page= inurl:&"
     },
     {
-        "title": "File upload endpoints",
-        "dork": "site:example.com \"choose file\""
+        "title": "LFI discovery parameters",
+        "dork": "site:example.com inurl:file= | inurl:folder= | inurl:include= | inurl:inc= | inurl:doc= inurl:&"
     },
     {
-        "title": "Confidential Internal Dorks 1",
-        "dork": "site:example.com \"password\" | \"credential\" | \"username\" | \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" | \"WS_FTP\" | \"ws_ftp\" | \"log\" | \"LOG\" filetype:log"
+        "title": "RCE discovery parameters",
+        "dork": "site:example.com inurl:cmd= | inurl:exec= | inurl:run= | inurl:query= inurl:&"
     },
     {
-        "title": "Confidential Internal Dorks 2",
-        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:pdf"
+        "title": "Error messages and stack traces",
+        "dork": "site:example.com \"stack trace\" | \"exception\" | \"traceback\" | \"debug\""
     },
     {
-        "title": "Confidential Internal Dorks 3",
-        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:xls"
+        "title": "Third-party leaks & collaboration tools",
+        "dork": "site:pastebin.com \"example.com\" | site:trello.com \"example.com\" | site:github.com \"example.com\" | site:gitlab.com \"example.com\""
     },
     {
-        "title": "Confidential Internal Dorks 4",
-        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:csv"
-    },
-    {
-        "title": "Confidential Internal Dorks 5",
-        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:doc"
-    },
-    {
-        "title": "Confidential Internal Dorks 6",
-        "dork": "site:example.com \"not for distribution\" | \"confidential\" | \"employee only\" | \"proprietary\" | \"top secret\" | \"classified\" | \"trade secret\" | \"internal\" | \"private\" filetype:txt"
-    },
-    {
-        "title": "API Docs",
-        "dork": "site:example.com inurl:apidocs | inurl:api-docs | inurl:swagger | inurl:api-explorer"
-    },
-    {
-        "title": "Sensitive API endpoints",
-        "dork": "site:example.com inurl:/api/"
-    },
-    {
-        "title": "SQL Injection",
-        "dork": "site:example.com intext:\"sql syntax near\" | intext:\"syntax error has occurred\" | intext:\"incorrect syntax near\" | intext:\"unexpected end of SQL command\" | intext:\"Warning: mysql_connect()\" | intext:\"Warning: mysql_query()\" | intext:\"Warning: pg_connect()\""
-    },
-    {
-        "title": "Third Party Coding Platforms Dorks",
-        "dork": "site:ideone.com | site:codebeautify.org | site:codeshare.io | site:codepen.io | site:repl.it | site:justpaste.it | site:pastebin.com | site:jsfiddle.net | site:trello.com | site:*.atlassian.net | site:bitbucket.org \"example.com\""
-    },
-    {
-        "title": "Cloud Storage",
+        "title": "Cloud Storage (AWS S3)",
         "dork": [
             "site:s3.amazonaws.com \"example.com\"",
-            "site:example.com intitle:index.of.bucket"
+            "site:s3.amazonaws.com \"backup\" \"example.com\"",
+            "site:s3.amazonaws.com \"prod\" \"example.com\"",
+            "site:s3.amazonaws.com \"dev\" \"example.com\"",
+            "site:s3.amazonaws.com ext:zip \"example.com\"",
+            "site:s3.amazonaws.com ext:sql \"example.com\"",
+            "site:s3.amazonaws.com ext:env \"example.com\""
         ]
     },
     {
-        "title": "Firebase",
+        "title": "Cloud Storage (Google Cloud Storage)",
+        "dork": [
+            "site:storage.googleapis.com \"example.com\"",
+            "site:storage.googleapis.com \"backup\" \"example.com\"",
+            "site:storage.googleapis.com \"export\" \"example.com\"",
+            "site:storage.googleapis.com ext:env \"example.com\"",
+            "site:storage.googleapis.com ext:json \"example.com\"",
+            "site:storage.googleapis.com ext:sql \"example.com\""
+        ]
+    },
+    {
+        "title": "Cloud Storage (Azure Blob Storage)",
+        "dork": [
+            "site:blob.core.windows.net \"example.com\"",
+            "site:blob.core.windows.net \"backup\" \"example.com\"",
+            "site:blob.core.windows.net \"archive\" \"example.com\"",
+            "site:blob.core.windows.net ext:zip \"example.com\"",
+            "site:blob.core.windows.net ext:env \"example.com\"",
+            "site:blob.core.windows.net ext:json \"example.com\""
+        ]
+    },
+    {
+        "title": "Cloud Apps (Azure App Services configs)",
+        "dork": [
+            "site:azurewebsites.net \"example.com\"",
+            "site:azurewebsites.net ext:config \"example.com\"",
+            "site:azurewebsites.net ext:xml \"example.com\"",
+            "site:azurewebsites.net \"connectionString\" \"example.com\""
+        ]
+    },
+    {
+        "title": "Cloud Storage (Firebase)",
         "dork": "site:firebaseio.com \"example.com\""
     },
     {
-        "title": "Google Drive",
-        "dork": "site:example.com intext:\"drive.google.com/drive/\""
+        "title": "Webhooks and integrations",
+        "dork": "site:example.com inurl:webhook | inurl:hooks | inurl:integrations"
     }
 ]
